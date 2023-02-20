@@ -1,23 +1,42 @@
-import logo from './logo.svg';
 import './App.css';
+import Button from './components/Button';
+import Counter from './components/Counter';
+import airflowLogo from './image/airflow.svg';
+import { useState } from 'react';
 
 function App() {
+
+  const [numClicks, setNumClicks] = useState(0);
+
+  const handleClick = () => {
+    setNumClicks (numClicks + 1);
+  }
+
+  const restartCounter = () => {
+    setNumClicks(0);
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='airflow-logo-container'>
+        <div className='title'><strong>Counter</strong></div>
+        <img
+        className='airflow-logo'
+        src={airflowLogo}
+        alt='Logo airflow'/>
+      </div>
+      <div className='container-principal'>
+        <Counter numClicks={numClicks} />
+        <Button 
+          text='Click'
+          isButtonClick={true}
+          handleClick={handleClick}/>
+        <Button 
+          text='Restart'
+          isButtonClick={false}
+          handleClick={restartCounter}/>
+      </div>
     </div>
   );
 }
